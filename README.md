@@ -7,6 +7,7 @@ Sistema industrial de **Monitoramento Preditivo em Malha Fechada**, **Cálculo d
 ## 🚀 Instalação e Execução
 
 ### 1. Frontend: Schutz Factory MES/OEE (React + TypeScript + Vite)
+
 A interface de usuário foi migrada para a aplicação moderna **Schutz Factory**, eliminando o Streamlit legado.
 
 ```bash
@@ -30,6 +31,7 @@ npm run build
 ---
 
 ### 2. Backend Nó Edge: FastAPI / Python
+
 A API assíncrona leve opera como serviço Edge para inferência ML e integração com CLP:
 
 ```bash
@@ -54,11 +56,13 @@ python -m src.main
 ### 3. Execução dos Testes Automatizados
 
 #### Testes do Backend (Python `unittest`)
+
 ```bash
 python -m unittest discover tests/unit
 ```
 
 #### Testes do Frontend (Vitest)
+
 ```bash
 cd frontend && npm run test
 ```
@@ -66,6 +70,7 @@ cd frontend && npm run test
 ---
 
 ### 4. Execução via Docker (Nó Edge)
+
 ```bash
 docker compose up --build -d
 ```
@@ -73,5 +78,6 @@ docker compose up --build -d
 ---
 
 ## 📦 Justificativa de Dependências Externas (RNF-005)
+
 - **Frontend (Node.js):** `react`, `recharts` (gráficos declarativos), `zustand` (esteira contínua reativa), `@tanstack/react-query` (cache assíncrono), `lucide-react`, `vitest` e `typescript`.
 - **Backend (Python):** `pandas`, `numpy`, `scipy`, `scikit-learn`, `opencv-python-headless`, `fastapi`, `pydantic`, `uvicorn`, `psutil`. Streamlit foi removido.
