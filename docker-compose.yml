@@ -1,0 +1,24 @@
+# Atende: RF-017
+services:
+  edge-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: vulcantech-edge-api:0.1.0
+    container_name: vulcantech_edge_node
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      - API_HOST=0.0.0.0
+      - API_PORT=8000
+      - LOG_LEVEL=INFO
+      - MIN_CONFIDENCE_THRESHOLD=0.50
+    volumes:
+      - ./data/models:/app/data/models
+    resources:
+      limits:
+        cpus: '1.0'
+        memory: 256M
+      reservations:
+        memory: 128M

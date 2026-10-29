@@ -1,0 +1,38 @@
+# Dependências mínimas essenciais - VulcanTech Smart Metals S.A.
+# Cada dependência externa possui justificativa explícita (RNF-005)
+
+# Manipulação de séries temporais de sensores e cálculo de janelas móveis
+pandas>=2.0.0
+
+# Operações matriciais e numéricas de alto desempenho
+numpy>=1.24.0
+
+# Algoritmos estatísticos e interpolação
+scipy>=1.10.0
+
+# Modelagem preditiva supervisionada, balanceamento de pesos e métricas MLOps
+scikit-learn>=1.3.0
+
+# Processamento óptico de soldagem (Canny, contornos) e termografia HSV
+opencv-python-headless>=4.8.0
+
+# API RESTful assíncrona leve para integração com CLP industrial
+fastapi>=0.100.0
+
+# Validação e integridade de esquemas de telemetria
+pydantic>=2.0.0
+
+# Servidor ASGI ultraleve para execução no nó Edge
+uvicorn>=0.23.0
+
+# Monitoramento de uso de memória e CPU para endpoint /health
+psutil>=5.9.0
+
+# Serialização eficiente do pipeline preditivo
+joblib>=1.3.0
+
+# Manipulação de multipart/form-data para upload de imagens nos endpoints de visão
+python-multipart>=0.0.6
+
+# Cliente HTTP leve para execução da suíte de testes de integração
+httpx>=0.24.0
