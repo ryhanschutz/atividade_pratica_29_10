@@ -1,26 +1,30 @@
 # Especificação de Imagens e Recursos Visuais (Assets)
+
 **Projeto:** VulcanTech Smart Metals S.A.  
 **Responsabilidade:** Usuário / Engenharia de Produto  
-**Status:** Aguardando arquivos finais fornecidos pelo usuário  
+**Status:** Amostras industriais integradas e ativas no simulador em tempo real  
 
 > [!NOTE]
-> O sistema foi projetado para operar com **tolerância total à ausência de imagens físicas**. Caso um arquivo ainda não esteja presente na pasta `assets/`, o sistema aplica tratamento de fallback com mensagens descritivas ou matrizes padrão de teste sem interrupção de serviço.
+> O sistema opera com tolerância total à ausência de imagens físicas. As amostras adicionadas pelo operador em formato PNG de alta resolução encontram-se catalogadas e prontas para uso tanto nos testes estáticos quanto no simulador automático de esteira industrial.
 
 ---
 
 ## Tabela de Especificação de Imagens
 
-| Arquivo | Onde é Usado | Dimensões Sugeridas | Formato | Descrição do que Deve Mostrar |
-|---|---|---|---|---|
-| `assets/logo_vulcantech.svg` | Cabeçalho da documentação, Swagger UI (`/docs`) e relatórios de inspeção | 320 x 80 px | SVG (ou PNG transparente) | Logotipo industrial vetorizado da VulcanTech Smart Metals S.A., em tons de grafite, cromo e laranja industrial. |
-| `assets/icon_favicon.png` | Favicon da API RESTful e interface do navegador | 64 x 64 px | PNG otimizado / ICO | Ícone minimalista simbolizando engrenagem de usinagem e circuito integrado de inteligência artificial. |
-| `assets/samples/solda_cordao_referencia.png` | Calibração do algoritmo Canny e demonstração de inspeção óptica | 640 x 480 px | PNG otimizado | Fotografia de cordão de solda MIG/MAG contínuo, uniforme, sem trincas e sem porosidades aparentes. |
-| `assets/samples/solda_porosidade_defeito.png` | Testes de reprovação de qualidade por porosidade na API | 640 x 480 px | PNG otimizado | Fotografia de cordão de solda apresentando descontinuidades e porosidades superficiais escuras. |
-| `assets/samples/termografia_haz_nominal.png` | Validação de distribuição térmica segura da Zona Afetada pelo Calor | 320 x 240 px | PNG (mapa térmico JET / Ironbow) | Imagem infravermelha termográfica com gradiente térmico controlado e sem pontos quentes críticos. |
-| `assets/samples/termografia_haz_sobreaquecida.png` | Teste de atuação emergencial por superaquecimento térmico da solda | 320 x 240 px | PNG (mapa térmico JET / Ironbow) | Imagem infravermelha termográfica exibindo ponto vermelho/magenta de sobreaquecimento acima do limite metalúrgico. |
+| Arquivo | Onde é Usado | Dimensões | Formato | Descrição do que Mostra |
+| --- | --- | --- | --- | --- |
+| `assets/logo_vulcantech.svg` | Cabeçalho e interface Streamlit | 52 x 52 px | SVG inline | Logotipo industrial vetorizado VulcanTech com geometria de solda e forno em laranja industrial. |
+| `data/samples/solda_aprovada.png` | Inspeção óptica de cordão | 1536 x 1024 px | PNG | Cordão de solda MIG contínuo e uniforme (aprovado na norma AWS D1.1 / ISO 5817). |
+| `data/samples/solda_porosa_reprovada.png` | Detecção de porosidades | 1536 x 1024 px | PNG | Cordão de solda apresentando porosidades escuras e cavidades superficiais. |
+| `data/samples/soldadura_defeituosa_oficina_retro.png` | Simulador de fábrica e inspeção | 1536 x 1024 px | PNG | Soldagem com descontinuidades acentuadas e trincas visíveis em oficina retro. |
+| `data/samples/soldadura_industrial_imperfeita_pixel_art.png` | Simulador e detecção de bordas | 1536 x 1024 px | PNG | Solda industrial imperfeita com variações de textura e bordas irregulares. |
+| `data/samples/termografia_haz_critica.png` | Análise termográfica e temperatura | 1536 x 1024 px | PNG | Termograma com superaquecimento na Zona Afetada pelo Calor (HAZ) acima de 900°C. |
+| `data/samples/mapa_termico_pixelado_soldadura.png` | Métrica de temperatura por pixel | 1536 x 1024 px | PNG | Mapa térmico em pseudocolor de alta densidade para avaliação de temperatura por pixel. |
 
 ---
 
 ## Diretrizes de Entrega para o Usuário
-1. Salvar os arquivos exatamente com os nomes listados na coluna **Arquivo** dentro do diretório `assets/` ou `assets/samples/`.
-2. Para imagens termográficas e de solda, priorizar contraste adequado entre o cordão/ponto quente e a chapa de fixação para garantir precisão nos limiares de segmentação.
+
+1. Salvar os novos arquivos na raiz ou na pasta `data/samples/`.
+2. O simulador de esteira reconhece e roda automaticamente todas as amostras em ciclo contínuo.
+3. Para termografia e inspeção geométrica, as imagens aceitam uploads diretos pela interface web em formatos PNG, JPG e JPEG.

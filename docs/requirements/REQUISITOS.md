@@ -1,4 +1,4 @@
-# Requisitos do Sistema - VulcanTech Smart Metals S.A.
+ Requisitos do Sistema - VulcanTech Smart Metals S.A.
 **Norma de Referência:** ISO/IEC/IEEE 29148  
 **Projeto:** Monitoramento Preditivo, OEE e Visão Computacional para Parque Fabril Inteligente  
 **Status:** Aprovado  

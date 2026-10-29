@@ -1,0 +1,75 @@
+@import "./styles/tokens.css";
+
+/* Reset global e sistema de layout industrial */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  width: 100%;
+  font-family: var(--font-family-sans, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif);
+  background-color: var(--sf-body-bg, #f0f3f6);
+  color: var(--sf-text-primary, #1e293b);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Card padrão do Smart Factory OEE */
+.sf-card {
+  background-color: var(--sf-card-bg, #ffffff);
+  border: 1px solid var(--sf-card-border, #e2e8f0);
+  border-radius: var(--sf-card-radius, 6px);
+  box-shadow: var(--sf-card-shadow, 0 1px 3px rgba(15, 23, 42, 0.05));
+  transition: box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.sf-card:hover {
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+  border-color: #cbd5e1;
+}
+
+/* Layout Geral da Aplicação */
+.sf-app-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+}
+
+.sf-main-layout {
+  display: flex;
+  flex: 1;
+  height: calc(100vh - 48px);
+  overflow: hidden;
+}
+
+.sf-content-viewport {
+  flex: 1;
+  overflow-y: auto;
+  background-color: var(--sf-body-bg, #f0f3f6);
+}
+
+/* Scrollbar estilizada */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}

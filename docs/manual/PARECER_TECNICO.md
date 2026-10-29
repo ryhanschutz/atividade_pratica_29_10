@@ -1,4 +1,4 @@
-# Parecer Técnico Regulatório e Sustentabilidade Industrial (ESG)
+ Parecer Técnico Regulatório e Sustentabilidade Industrial (ESG)
 **Empresa:** VulcanTech Smart Metals S.A.  
 **Planta Operacional:** Células de Manufatura CEL-201 a CEL-204  
 **Data:** 29 de Outubro de 2026  

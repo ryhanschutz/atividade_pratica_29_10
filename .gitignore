@@ -44,3 +44,12 @@ data/models/*.joblib
 # Operating system artifacts
 .DS_Store
 Thumbs.db
+
+# Frontend / Node
+node_modules/
+frontend/node_modules/
+frontend/dist/
+.vite/
+.vitest/
+playwright-report/
+test-results/
