@@ -79,3 +79,4 @@ export interface OpenCVDataset {
   weld: Record<string, WeldInspectionData>;
   haz: Record<string, HAZInspectionData>;
 }
+
