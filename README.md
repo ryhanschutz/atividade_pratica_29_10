@@ -1,16 +1,17 @@
-# ⚙️ VulcanTech Smart Metals S.A. — Schutz Factory MES/OEE
+# ⚙️ Schutz IGNITION — OEE • BI (VulcanTech Smart Metals S.A.)
 
 [![React](https://img.shields.io/badge/React-19.3-61DAFB?logo=react&logoColor=black)](https://react.dev/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.8-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![Vite](https://img.shields.io/badge/Vite-8.3-646CFF?logo=vite&logoColor=white)](https://vite.dev/)
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.100+-009688?logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com/)
 [![Python](https://img.shields.io/badge/Python-3.11+-3776AB?logo=python&logoColor=white)](https://www.python.org/)
+[![OpenCV](https://img.shields.io/badge/OpenCV-4.10+-5C3EE8?logo=opencv&logoColor=white)](https://opencv.org/)
 [![Vitest](https://img.shields.io/badge/Vitest-3.0-FCC72B?logo=vitest&logoColor=black)](https://vitest.dev/)
 [![Recharts](https://img.shields.io/badge/Recharts-2.15-22b5bf)](https://recharts.org/)
 [![Zustand](https://img.shields.io/badge/Zustand-5.0-443e38)](https://zustand.docs.pmnd.rs/)
 [![ISO 22400--2](https://img.shields.io/badge/Norma-ISO%2022400--2%3A2014-blue)](#-cálculo-de-oee-e-normas-industriais)
 
-Plataforma industrial de **Execução da Manufatura (MES)**, **Monitoramento Preditivo em Malha Fechada**, **Cálculo de OEE (Overall Equipment Effectiveness)** e **Inspeção por Visão Computacional** para células de usinagem e soldagem automatizadas (**CEL-201** a **CEL-204**).
+Plataforma industrial de **Execução da Manufatura (MES)**, **Monitoramento Preditivo em Malha Fechada**, **Cálculo de OEE (Overall Equipment Effectiveness)** e **Inspeção por Visão Computacional OpenCV com Extração de Pontos** para células de usinagem e soldagem automatizadas (**CEL-201** a **CEL-204**).
 
 > **Aviso de Migração:** Toda a interface legada desenvolvida em Streamlit (`src/adapters/ui/painel_operador.py`) foi **eliminada e migrada integralmente** para uma aplicação web unificada de alta performance em **React 18+ com TypeScript e Vite**, operando com latência zero e suporte a computação em borda (*Edge Computing*).
 
