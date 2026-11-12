@@ -1,7 +1,12 @@
-# Node & Dependencies
+# ==============================================================================
+# Schutz IGNITION (Frontend) — .gitignore
+# ==============================================================================
+
+# Dependencies & Build Output
 node_modules/
 dist/
 dist-ssr/
+*.tsbuildinfo
 
 # Logs
 logs/
@@ -20,12 +25,13 @@ playwright-report/
 blob-report/
 playwright/.cache/
 
-# Local Environment
+# Local Environment Variables & Secrets
 *.local
 .env.local
 .env.*.local
+!*.env.example
 
-# IDEs & System
+# IDEs & System Artifacts
 .vscode/*
 !.vscode/extensions.json
 .idea/
