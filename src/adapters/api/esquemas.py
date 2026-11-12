@@ -71,14 +71,44 @@ class SystemHealthResponse(BaseModel):
     modelo_carregado: bool
 
 
+class PontoDefeito(BaseModel):
+    """Ponto de descontinuidade ou poro identificado pelo OpenCV."""
+    id: str
+    x: int
+    y: int
+    x_global: int
+    y_global: int
+    largura_px: int
+    altura_px: int
+    area_px: float
+    diametro_px: float
+    circularidade: float
+    severidade: str
+    classificacao_aws: str
+    acao_recomendada: str
+
+
+class PontoTermico(BaseModel):
+    """Ponto quente ou pico térmico identificado no perfil HAZ."""
+    id: str
+    x: int
+    y: int
+    temperatura_c: float
+    area_px: float
+    zona_haz: str
+    severidade: str
+
+
 class WeldInspectionResponse(BaseModel):
-    """Resultado da inspeção óptica Canny do cordão de solda."""
+    """Resultado da inspeção óptica Canny do cordão de solda com pontos identificados."""
     status_cordao: str
     total_poros_detectados: int
     area_total_poros_px: float
     taxa_porosidade_percentual: float
     largura_imagem_px: int
     altura_imagem_px: int
+    pontos_defeito: Optional[List[PontoDefeito]] = []
+    etapas_base64: Optional[Dict[str, str]] = None
 
 
 class HAZAnalysisResponse(BaseModel):
@@ -87,3 +117,8 @@ class HAZAnalysisResponse(BaseModel):
     percentual_area_sobreaquecida: float
     pixels_criticos: int
     diretriz_termica: str
+    pixel_temp_min_c: Optional[float] = 25.0
+    pixel_temp_max_c: Optional[float] = 1500.0
+    pixel_temp_media_c: Optional[float] = 350.0
+    pontos_quentes: Optional[List[PontoTermico]] = []
+    etapas_base64: Optional[Dict[str, str]] = None
