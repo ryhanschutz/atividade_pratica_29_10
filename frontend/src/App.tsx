@@ -11,21 +11,18 @@ import { SaudeEdgeView } from "./features/saude-edge/components/SaudeEdgeView";
 import { SmartFactoryFilterState } from "./features/smart-factory/types/smartFactory";
 
 const MODULE_TITLES: Record<ActiveModuleKey, string> = {
-  home: "Home",
-  operacao: "Operação e Inferência",
-  visao: "Visão Computacional",
-  saneamento: "Saneamento de Dados",
-  saude: "Saúde do Nó Edge",
+  home: "Visão Geral OEE (Dashboard Executivo)",
+  operacao: "Operação e Inferência CLP (Malha Fechada)",
+  visao: "Visão Computacional & Simulador (AWS D1.1 e HAZ)",
+  saneamento: "Saneamento de Dados (Filtro de Sensores)",
+  saude: "Saúde do Nó Edge (Hardware & RandomForest)",
 };
 
 const DEFAULT_FILTERS: SmartFactoryFilterState = {
-  dateRange: "4/15/2024 - 4/20/2024",
-  operationType: "All",
-  machine: "All",
-  position: "All",
-  product: "All",
-  shiftName: "All",
-  employee: "All",
+  periodo: "Amostragem IoT contínua (5 min)",
+  idCelula: "TODAS",
+  ligaMetalica: "TODAS",
+  tipoFalha: "TODOS",
 };
 
 export default function App() {
@@ -39,37 +36,26 @@ export default function App() {
     setFilters((prev) => ({ ...prev, [key]: val }));
   };
 
-  const handleSync = () => {
-    // Feedback visual de sincronização e recálculo
-    setFilters((prev) => ({ ...prev }));
-  };
-
-  const handleReset = () => {
-    setFilters(DEFAULT_FILTERS);
-  };
-
   return (
     <div className="sf-app-container">
-      {/* 1. Header Superior Dark (Smart Factory) */}
+      {/* 1. Header Superior com Logo Oficial Schutz IGNITION */}
       <Navbar currentModuleTitle={MODULE_TITLES[activeModule]} />
 
-      {/* 2. Área Central com Barras Laterais e Conteúdo */}
+      {/* 2. Área Central com Barra Lateral de Módulos, Filtros e Conteúdo */}
       <div className="sf-main-layout">
-        {/* Barra Vertical de Ícones (48px) */}
+        {/* Barra Vertical de Módulos Funcionais */}
         <IconSidebar
           activeModule={activeModule}
           onSelectModule={(mod) => setActiveModule(mod)}
         />
 
-        {/* Barra Lateral de Filtros (210px) */}
+        {/* Barra Lateral de Filtros Operacionais do Parque Fabril */}
         <FilterSidebar
           filters={filters}
           onChangeFilter={handleChangeFilter}
-          onSync={handleSync}
-          onReset={handleReset}
         />
 
-        {/* Viewport Principal do Módulo Ativo */}
+        {/* Conteúdo Principal do Módulo Ativo (100% em Português) */}
         <main className="sf-content-viewport">
           {activeModule === "home" && <SmartFactoryDashboard filters={filters} />}
           {activeModule === "operacao" && <OperacaoInferenciaView />}
@@ -81,4 +67,3 @@ export default function App() {
     </div>
   );
 }
-

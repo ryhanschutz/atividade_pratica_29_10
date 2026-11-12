@@ -34,18 +34,18 @@ interface SmartFactoryDashboardProps {
 }
 
 export const SmartFactoryDashboard: React.FC<SmartFactoryDashboardProps> = ({ filters }) => {
-  // Ajuste reativo com base no filtro selecionado (ex: máquina específica ou produto)
-  const isFiltered = filters && filters.machine !== "All";
+  // Ajuste reativo baseado nos filtros do chão de fábrica (PDF)
+  const isFiltered = filters && (filters.idCelula !== "TODAS" || filters.ligaMetalica !== "TODAS" || filters.tipoFalha !== "TODOS");
 
   const kpis = useMemo(() => {
     if (isFiltered) {
       return {
         ...INITIAL_SMART_FACTORY_KPIS,
-        finishProductionOrders: 6,
-        producedQuantity: 3750,
-        acceptedQuantity: 3580,
-        rejectedQuantity: 170,
-        firstTimeYield: 95.5,
+        ordensConcluidas: 6,
+        quantidadeProduzida: 3750,
+        quantidadeAprovada: 3580,
+        quantidadeRefugada: 170,
+        rendimentoPrimeiraViagem: 95.5,
       };
     }
     return INITIAL_SMART_FACTORY_KPIS;
@@ -55,9 +55,9 @@ export const SmartFactoryDashboard: React.FC<SmartFactoryDashboardProps> = ({ fi
     if (isFiltered) {
       return {
         oee: 68.2,
-        availability: 88.0,
+        disponibilidade: 88.0,
         performance: 82.0,
-        quality: 94.5,
+        qualidade: 94.5,
       };
     }
     return INITIAL_OEE_PILLARS;
@@ -66,18 +66,21 @@ export const SmartFactoryDashboard: React.FC<SmartFactoryDashboardProps> = ({ fi
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: "16px", padding: "16px 20px" }}>
       {/* 1. Banner de Boas-Vindas */}
-      <div style={{ textAlign: "center", padding: "6px 0 2px" }}>
+      <div style={{ textAlign: "center", padding: "4px 0" }}>
         <h2
           style={{
             fontSize: "17px",
             fontWeight: 700,
-            color: "var(--sf-text-primary, #1e293b)",
+            color: "var(--schutz-navy, #0c233a)",
             margin: 0,
             letterSpacing: "-0.2px",
           }}
         >
-          Welcome to the Schutz Factory. Here's a summary of what happened on your shop floor
+          Bem-vindo ao Schutz IGNITION OEE • Resumo Operacional em Tempo Real
         </h2>
+        <p style={{ fontSize: "12px", color: "var(--sf-text-secondary, #64748b)", margin: "4px 0 0" }}>
+          Monitoramento de produtividade e perdas cronometradas nas células robotizadas (CEL-201 a CEL-204) conforme ISO 22400-2
+        </p>
       </div>
 
       {/* 2. Primeira Linha: 5 Cards de Métricas Principais */}
@@ -90,56 +93,56 @@ export const SmartFactoryDashboard: React.FC<SmartFactoryDashboardProps> = ({ fi
       >
         {/* Card 1 */}
         <div className="sf-card" style={{ textAlign: "center", padding: "16px 8px" }}>
-          <div style={{ fontSize: "28px", fontWeight: 600, color: "var(--sf-metric-primary, #1e293b)" }}>
-            {kpis.finishProductionOrders}
+          <div style={{ fontSize: "28px", fontWeight: 700, color: "var(--schutz-navy, #0c233a)" }}>
+            {kpis.ordensConcluidas}
           </div>
-          <div style={{ fontSize: "11px", color: "var(--sf-text-secondary, #64748b)", marginTop: "4px" }}>
-            Finish Production Orders
+          <div style={{ fontSize: "11px", fontWeight: 600, color: "var(--sf-text-secondary, #64748b)", marginTop: "4px" }}>
+            Ordens de Produção Finalizadas
           </div>
         </div>
 
         {/* Card 2 */}
         <div className="sf-card" style={{ textAlign: "center", padding: "16px 8px" }}>
-          <div style={{ fontSize: "28px", fontWeight: 600, color: "var(--sf-metric-primary, #1e293b)" }}>
-            {kpis.producedQuantity.toLocaleString("en-US")}
+          <div style={{ fontSize: "28px", fontWeight: 700, color: "var(--schutz-navy, #0c233a)" }}>
+            {kpis.quantidadeProduzida.toLocaleString("pt-BR")}
           </div>
-          <div style={{ fontSize: "11px", color: "var(--sf-text-secondary, #64748b)", marginTop: "4px" }}>
-            Produced Quantity
+          <div style={{ fontSize: "11px", fontWeight: 600, color: "var(--sf-text-secondary, #64748b)", marginTop: "4px" }}>
+            Quantidade Total Produzida
           </div>
         </div>
 
         {/* Card 3 */}
         <div className="sf-card" style={{ textAlign: "center", padding: "16px 8px" }}>
-          <div style={{ fontSize: "28px", fontWeight: 600, color: "var(--sf-metric-primary, #1e293b)" }}>
-            {kpis.acceptedQuantity.toLocaleString("en-US")}
+          <div style={{ fontSize: "28px", fontWeight: 700, color: "var(--schutz-green, #16a34a)" }}>
+            {kpis.quantidadeAprovada.toLocaleString("pt-BR")}
           </div>
-          <div style={{ fontSize: "11px", color: "var(--sf-text-secondary, #64748b)", marginTop: "4px" }}>
-            Accepted Quantity
-          </div>
-        </div>
-
-        {/* Card 4 - Refugo (Vermelho conforme referência) */}
-        <div className="sf-card" style={{ textAlign: "center", padding: "16px 8px" }}>
-          <div style={{ fontSize: "28px", fontWeight: 600, color: "var(--sf-metric-danger, #dc2626)" }}>
-            {kpis.rejectedQuantity.toLocaleString("en-US")}
-          </div>
-          <div style={{ fontSize: "11px", color: "var(--sf-text-secondary, #64748b)", marginTop: "4px" }}>
-            Rejected Quantity
+          <div style={{ fontSize: "11px", fontWeight: 600, color: "var(--sf-text-secondary, #64748b)", marginTop: "4px" }}>
+            Peças Conformes (Aprovadas)
           </div>
         </div>
 
-        {/* Card 5 - Rendimento de Primeira Viagem */}
-        <div className="sf-card" style={{ textAlign: "center", padding: "16px 8px" }}>
-          <div style={{ fontSize: "28px", fontWeight: 600, color: "var(--sf-metric-primary, #1e293b)" }}>
-            {kpis.firstTimeYield.toFixed(1)} %
+        {/* Card 4 - Refugo (Vermelho / Laranja de alerta conforme o logo) */}
+        <div className="sf-card" style={{ textAlign: "center", padding: "16px 8px", borderLeft: "4px solid var(--schutz-red, #dc2626)" }}>
+          <div style={{ fontSize: "28px", fontWeight: 700, color: "var(--schutz-red, #dc2626)" }}>
+            {kpis.quantidadeRefugada.toLocaleString("pt-BR")}
           </div>
-          <div style={{ fontSize: "11px", color: "var(--sf-text-secondary, #64748b)", marginTop: "4px" }}>
-            First Time Yield
+          <div style={{ fontSize: "11px", fontWeight: 600, color: "var(--sf-text-secondary, #64748b)", marginTop: "4px" }}>
+            Peças Refugadas (Sucata)
+          </div>
+        </div>
+
+        {/* Card 5 - Rendimento de Primeira Viagem (FTY) */}
+        <div className="sf-card" style={{ textAlign: "center", padding: "16px 8px" }}>
+          <div style={{ fontSize: "28px", fontWeight: 700, color: "var(--schutz-orange, #ff5500)" }}>
+            {kpis.rendimentoPrimeiraViagem.toFixed(1)} %
+          </div>
+          <div style={{ fontSize: "11px", fontWeight: 600, color: "var(--sf-text-secondary, #64748b)", marginTop: "4px" }}>
+            Rendimento de 1ª Viagem (FTY)
           </div>
         </div>
       </div>
 
-      {/* 3. Segunda Linha: Orders by Status | Produced & Rejected | Produced by Product */}
+      {/* 3. Segunda Linha: Ordens por Status | Produzido vs Refugado | Produção por Liga */}
       <div
         style={{
           display: "grid",
@@ -148,10 +151,10 @@ export const SmartFactoryDashboard: React.FC<SmartFactoryDashboardProps> = ({ fi
           minHeight: "220px",
         }}
       >
-        {/* Card: Orders by Status */}
+        {/* Card: Ordens por Status */}
         <div className="sf-card" style={{ padding: "14px 16px" }}>
-          <div style={{ fontSize: "13px", fontWeight: 700, color: "#1e293b", textAlign: "center", marginBottom: "8px" }}>
-            Orders by Status
+          <div style={{ fontSize: "13px", fontWeight: 700, color: "var(--schutz-navy, #0c233a)", textAlign: "center", marginBottom: "8px" }}>
+            Ordens de Fabricação por Status
           </div>
           <div style={{ height: "165px", width: "100%" }}>
             <ResponsiveContainer width="100%" height="100%">
@@ -175,7 +178,7 @@ export const SmartFactoryDashboard: React.FC<SmartFactoryDashboardProps> = ({ fi
               </PieChart>
             </ResponsiveContainer>
           </div>
-          {/* Legenda compacta inline */}
+          {/* Legenda inline */}
           <div
             style={{
               display: "flex",
@@ -195,10 +198,10 @@ export const SmartFactoryDashboard: React.FC<SmartFactoryDashboardProps> = ({ fi
           </div>
         </div>
 
-        {/* Card: Produced and Rejected Quantity */}
+        {/* Card: Produção Realizada e Refugos */}
         <div className="sf-card" style={{ padding: "14px 16px" }}>
-          <div style={{ fontSize: "13px", fontWeight: 700, color: "#1e293b", textAlign: "center", marginBottom: "8px" }}>
-            Produced and Rejected Quantity
+          <div style={{ fontSize: "13px", fontWeight: 700, color: "var(--schutz-navy, #0c233a)", textAlign: "center", marginBottom: "8px" }}>
+            Produção Diária vs. Peças Refugadas
           </div>
           <div style={{ height: "185px", width: "100%" }}>
             <ResponsiveContainer width="100%" height="100%">
@@ -209,34 +212,42 @@ export const SmartFactoryDashboard: React.FC<SmartFactoryDashboardProps> = ({ fi
                   domain={[-500, 2000]}
                   ticks={[-500, 0, 500, 1000, 1500, 2000]}
                   tick={{ fontSize: 9, fill: "#64748b" }}
-                  tickFormatter={(v) => (v === 0 ? "0.0" : `${(v / 1000).toFixed(1)}k`)}
+                  tickFormatter={(v) => (v === 0 ? "0" : `${v}`)}
                 />
-                <Tooltip />
+                <Tooltip formatter={(value, name) => [`${value} un`, name === "produced" ? "Produzido" : "Refugado"]} />
                 <Line
                   type="monotone"
                   dataKey="produced"
-                  name="Produced"
-                  stroke="var(--sf-chart-produced-line, #312e81)"
-                  strokeWidth={2}
-                  dot={{ r: 3, fill: "#312e81" }}
+                  name="produced"
+                  stroke="var(--schutz-navy, #0c233a)"
+                  strokeWidth={2.5}
+                  dot={{ r: 3.5, fill: "var(--schutz-navy, #0c233a)" }}
                 />
                 <Line
                   type="monotone"
                   dataKey="rejected"
-                  name="Rejected"
-                  stroke="var(--sf-chart-rejected-line, #f43f5e)"
-                  strokeWidth={2}
-                  dot={{ r: 3, fill: "#f43f5e" }}
+                  name="rejected"
+                  stroke="var(--schutz-orange, #ff5500)"
+                  strokeWidth={2.5}
+                  dot={{ r: 3.5, fill: "var(--schutz-orange, #ff5500)" }}
                 />
               </LineChart>
             </ResponsiveContainer>
           </div>
+          <div style={{ display: "flex", justifyContent: "center", gap: "16px", fontSize: "11px", color: "#64748b" }}>
+            <span style={{ display: "inline-flex", alignItems: "center", gap: "5px" }}>
+              <span style={{ width: 10, height: 3, backgroundColor: "var(--schutz-navy, #0c233a)" }} /> Produzido
+            </span>
+            <span style={{ display: "inline-flex", alignItems: "center", gap: "5px" }}>
+              <span style={{ width: 10, height: 3, backgroundColor: "var(--schutz-orange, #ff5500)" }} /> Refugado
+            </span>
+          </div>
         </div>
 
-        {/* Card: Produced Quantity by Product */}
+        {/* Card: Produção por Liga Metálica (Conforme PDF VulcanTech) */}
         <div className="sf-card" style={{ padding: "14px 16px" }}>
-          <div style={{ fontSize: "13px", fontWeight: 700, color: "#1e293b", textAlign: "center", marginBottom: "8px" }}>
-            Produced Quantity by Product
+          <div style={{ fontSize: "13px", fontWeight: 700, color: "var(--schutz-navy, #0c233a)", textAlign: "center", marginBottom: "8px" }}>
+            Volume por Liga Metálica (Lotes)
           </div>
           <div style={{ height: "165px", width: "100%" }}>
             <ResponsiveContainer width="100%" height="100%">
@@ -255,28 +266,31 @@ export const SmartFactoryDashboard: React.FC<SmartFactoryDashboardProps> = ({ fi
                     <Cell key={`cell-prod-${index}`} fill={entry.color} />
                   ))}
                 </Pie>
-                <Tooltip formatter={(value, name) => [`${value} un`, name]} />
+                <Tooltip formatter={(value, name) => [`${value} kg / peças`, name]} />
               </PieChart>
             </ResponsiveContainer>
           </div>
-          {/* Rótulos */}
           <div
             style={{
               display: "flex",
-              justifyContent: "space-between",
+              justifyContent: "center",
+              gap: "8px",
+              flexWrap: "wrap",
               fontSize: "10px",
               color: "#64748b",
-              padding: "0 8px",
             }}
           >
-            <span>Salad</span>
-            <span>Chicken eggs</span>
-            <span>Beef - Fried St...</span>
+            {INITIAL_PRODUCTS_SHARE.map((item) => (
+              <span key={item.name} style={{ display: "inline-flex", alignItems: "center", gap: "4px" }}>
+                <span style={{ width: 8, height: 8, borderRadius: "50%", backgroundColor: item.color }} />
+                {item.name}
+              </span>
+            ))}
           </div>
         </div>
       </div>
 
-      {/* 4. Terceira Linha: 4 OEE Gauges | Active Machines | Active Employees */}
+      {/* 4. Terceira Linha: 4 OEE Gauges | Células Ativas | Alocação de Operadores */}
       <div
         style={{
           display: "grid",
@@ -284,7 +298,7 @@ export const SmartFactoryDashboard: React.FC<SmartFactoryDashboardProps> = ({ fi
           gap: "14px",
         }}
       >
-        {/* Bloco 4 Gauges OEE */}
+        {/* Bloco 4 Gauges OEE com Paleta Schutz IGNITION */}
         <div
           className="sf-card"
           style={{
@@ -292,18 +306,19 @@ export const SmartFactoryDashboard: React.FC<SmartFactoryDashboardProps> = ({ fi
             display: "flex",
             alignItems: "center",
             justifyContent: "space-around",
+            borderTop: "3px solid var(--schutz-orange, #ff5500)",
           }}
         >
-          <OeeGauge title="OEE" value={oeePillars.oee} color="#84cc16" />
-          <OeeGauge title="Availability" value={oeePillars.availability} color="#84cc16" />
-          <OeeGauge title="Performance" value={oeePillars.performance} color="#84cc16" />
-          <OeeGauge title="Quality" value={oeePillars.quality} color="#84cc16" />
+          <OeeGauge title="OEE Geral" value={oeePillars.oee} color="var(--schutz-orange, #ff5500)" />
+          <OeeGauge title="Disponibilidade" value={oeePillars.disponibilidade} color="var(--schutz-cyan, #0284c7)" />
+          <OeeGauge title="Performance" value={oeePillars.performance} color="var(--schutz-green, #16a34a)" />
+          <OeeGauge title="Qualidade" value={oeePillars.qualidade} color="var(--schutz-amber, #f59e0b)" />
         </div>
 
-        {/* Card: Active Machines */}
+        {/* Card: Células Flexíveis (CEL-201..204) */}
         <div className="sf-card" style={{ padding: "14px 16px" }}>
-          <div style={{ fontSize: "13px", fontWeight: 700, color: "#1e293b", textAlign: "center", marginBottom: "6px" }}>
-            Active Machines
+          <div style={{ fontSize: "13px", fontWeight: 700, color: "var(--schutz-navy, #0c233a)", textAlign: "center", marginBottom: "6px" }}>
+            Status das Células (201-204)
           </div>
           <div style={{ height: "130px", width: "100%" }}>
             <ResponsiveContainer width="100%" height="100%">
@@ -326,15 +341,15 @@ export const SmartFactoryDashboard: React.FC<SmartFactoryDashboardProps> = ({ fi
             </ResponsiveContainer>
           </div>
           <div style={{ display: "flex", justifyContent: "center", gap: "10px", fontSize: "10px", color: "#64748b" }}>
-            <span>Active (5) (83.33%)</span>
-            <span>Stopped (1) (16.67%)</span>
+            <span>Operando (4) (100%)</span>
+            <span>Parada (0) (0%)</span>
           </div>
         </div>
 
-        {/* Card: Active Employees */}
+        {/* Card: Alocação de Operadores */}
         <div className="sf-card" style={{ padding: "14px 16px" }}>
-          <div style={{ fontSize: "13px", fontWeight: 700, color: "#1e293b", textAlign: "center", marginBottom: "6px" }}>
-            Active Employees
+          <div style={{ fontSize: "13px", fontWeight: 700, color: "var(--schutz-navy, #0c233a)", textAlign: "center", marginBottom: "6px" }}>
+            Equipe Operacional
           </div>
           <div style={{ height: "130px", width: "100%" }}>
             <ResponsiveContainer width="100%" height="100%">
@@ -357,13 +372,13 @@ export const SmartFactoryDashboard: React.FC<SmartFactoryDashboardProps> = ({ fi
             </ResponsiveContainer>
           </div>
           <div style={{ display: "flex", justifyContent: "center", gap: "10px", fontSize: "10px", color: "#64748b" }}>
-            <span>Active (5) (62.5%)</span>
-            <span>Stopped (3) (37.5%)</span>
+            <span>Em Posto (5) (62.5%)</span>
+            <span>Pausa/Setup (3) (37.5%)</span>
           </div>
         </div>
       </div>
 
-      {/* 5. Quarta Linha: Downtime Cards | OEE KPI's Line Chart | Available Operators Bar Chart */}
+      {/* 5. Quarta Linha: Downtime Cards | Evolução Histórica OEE | Operadores Disponíveis */}
       <div
         style={{
           display: "grid",
@@ -373,31 +388,31 @@ export const SmartFactoryDashboard: React.FC<SmartFactoryDashboardProps> = ({ fi
       >
         {/* Coluna Esquerda: Dois cards empilhados de Downtime */}
         <div style={{ display: "flex", flexDirection: "column", gap: "14px" }}>
-          {/* Unplanned Downtime */}
-          <div className="sf-card" style={{ flex: 1, padding: "16px", textAlign: "center" }}>
-            <div style={{ fontSize: "28px", fontWeight: 600, color: "var(--sf-metric-danger, #dc2626)" }}>
-              {kpis.unplannedDowntimeHours.toFixed(1)}
+          {/* Paradas Não Planejadas */}
+          <div className="sf-card" style={{ flex: 1, padding: "16px", textAlign: "center", borderLeft: "4px solid var(--schutz-red, #dc2626)" }}>
+            <div style={{ fontSize: "28px", fontWeight: 700, color: "var(--schutz-red, #dc2626)" }}>
+              {kpis.paradasNaoPlanejadasHoras.toFixed(1)} h
             </div>
-            <div style={{ fontSize: "11px", color: "var(--sf-text-secondary, #64748b)", marginTop: "4px" }}>
-              Unplanned Downtime (h)
+            <div style={{ fontSize: "11px", fontWeight: 600, color: "var(--sf-text-secondary, #64748b)", marginTop: "4px" }}>
+              Paradas Não Planejadas (Quebras)
             </div>
           </div>
 
-          {/* Planned Downtime */}
-          <div className="sf-card" style={{ flex: 1, padding: "16px", textAlign: "center" }}>
-            <div style={{ fontSize: "28px", fontWeight: 600, color: "var(--sf-metric-primary, #1e293b)" }}>
-              {kpis.plannedDowntimeHours.toFixed(1)}
+          {/* Paradas Planejadas */}
+          <div className="sf-card" style={{ flex: 1, padding: "16px", textAlign: "center", borderLeft: "4px solid var(--schutz-navy, #0c233a)" }}>
+            <div style={{ fontSize: "28px", fontWeight: 700, color: "var(--schutz-navy, #0c233a)" }}>
+              {kpis.paradasPlanejadasHoras.toFixed(1)} h
             </div>
-            <div style={{ fontSize: "11px", color: "var(--sf-text-secondary, #64748b)", marginTop: "4px" }}>
-              Planned Downtime (h)
+            <div style={{ fontSize: "11px", fontWeight: 600, color: "var(--sf-text-secondary, #64748b)", marginTop: "4px" }}>
+              Paradas Planejadas (Setup / PCM)
             </div>
           </div>
         </div>
 
-        {/* Card Central: OEE KPI's (Multi-linha) */}
+        {/* Card Central: Evolução dos KPIs de OEE */}
         <div className="sf-card" style={{ padding: "14px 16px" }}>
-          <div style={{ fontSize: "13px", fontWeight: 700, color: "#1e293b", textAlign: "center", marginBottom: "6px" }}>
-            OEE KPI's
+          <div style={{ fontSize: "13px", fontWeight: 700, color: "var(--schutz-navy, #0c233a)", textAlign: "center", marginBottom: "6px" }}>
+            Evolução dos Indicadores de OEE (ISO 22400-2)
           </div>
           <div style={{ height: "160px", width: "100%" }}>
             <ResponsiveContainer width="100%" height="100%">
@@ -408,13 +423,13 @@ export const SmartFactoryDashboard: React.FC<SmartFactoryDashboardProps> = ({ fi
                   domain={[0, 100]}
                   ticks={[0, 50, 100]}
                   tick={{ fontSize: 9, fill: "#64748b" }}
-                  tickFormatter={(v) => `${v} %`}
+                  tickFormatter={(v) => `${v}%`}
                 />
                 <Tooltip formatter={(value, name) => [`${value}%`, name]} />
-                <Line type="monotone" dataKey="oee" name="OEE" stroke="#8b5cf6" strokeWidth={2} dot={{ r: 3 }} />
-                <Line type="monotone" dataKey="availability" name="Availability" stroke="#1e40af" strokeWidth={2} dot={{ r: 3 }} />
-                <Line type="monotone" dataKey="performance" name="Performance" stroke="#10b981" strokeWidth={2} dot={{ r: 3 }} />
-                <Line type="monotone" dataKey="quality" name="Quality" stroke="#ca8a04" strokeWidth={2} dot={{ r: 3 }} />
+                <Line type="monotone" dataKey="oee" name="OEE Global" stroke="var(--schutz-orange, #ff5500)" strokeWidth={2.5} dot={{ r: 3 }} />
+                <Line type="monotone" dataKey="availability" name="Disponibilidade" stroke="var(--schutz-cyan, #0284c7)" strokeWidth={2} dot={{ r: 3 }} />
+                <Line type="monotone" dataKey="performance" name="Performance" stroke="var(--schutz-green, #16a34a)" strokeWidth={2} dot={{ r: 3 }} />
+                <Line type="monotone" dataKey="quality" name="Qualidade" stroke="var(--schutz-amber, #f59e0b)" strokeWidth={2} dot={{ r: 3 }} />
               </LineChart>
             </ResponsiveContainer>
           </div>
@@ -430,24 +445,24 @@ export const SmartFactoryDashboard: React.FC<SmartFactoryDashboardProps> = ({ fi
             }}
           >
             <span style={{ display: "inline-flex", alignItems: "center", gap: "4px" }}>
-              <span style={{ width: 8, height: 8, borderRadius: "50%", backgroundColor: "#8b5cf6" }} /> OEE
+              <span style={{ width: 8, height: 8, borderRadius: "50%", backgroundColor: "var(--schutz-orange, #ff5500)" }} /> OEE
             </span>
             <span style={{ display: "inline-flex", alignItems: "center", gap: "4px" }}>
-              <span style={{ width: 8, height: 8, borderRadius: "50%", backgroundColor: "#1e40af" }} /> Availability
+              <span style={{ width: 8, height: 8, borderRadius: "50%", backgroundColor: "var(--schutz-cyan, #0284c7)" }} /> Disponibilidade
             </span>
             <span style={{ display: "inline-flex", alignItems: "center", gap: "4px" }}>
-              <span style={{ width: 8, height: 8, borderRadius: "50%", backgroundColor: "#10b981" }} /> Performance
+              <span style={{ width: 8, height: 8, borderRadius: "50%", backgroundColor: "var(--schutz-green, #16a34a)" }} /> Performance
             </span>
             <span style={{ display: "inline-flex", alignItems: "center", gap: "4px" }}>
-              <span style={{ width: 8, height: 8, borderRadius: "50%", backgroundColor: "#ca8a04" }} /> Quality
+              <span style={{ width: 8, height: 8, borderRadius: "50%", backgroundColor: "var(--schutz-amber, #f59e0b)" }} /> Qualidade
             </span>
           </div>
         </div>
 
-        {/* Card Direito: Available Operators (Bar Chart com números sobre as barras) */}
+        {/* Card Direito: Operadores Disponíveis (Bar Chart) */}
         <div className="sf-card" style={{ padding: "14px 16px" }}>
-          <div style={{ fontSize: "13px", fontWeight: 700, color: "#1e293b", textAlign: "center", marginBottom: "6px" }}>
-            Available Operators
+          <div style={{ fontSize: "13px", fontWeight: 700, color: "var(--schutz-navy, #0c233a)", textAlign: "center", marginBottom: "6px" }}>
+            Operadores Escalados por Turno
           </div>
           <div style={{ height: "180px", width: "100%" }}>
             <ResponsiveContainer width="100%" height="100%">
@@ -459,9 +474,9 @@ export const SmartFactoryDashboard: React.FC<SmartFactoryDashboardProps> = ({ fi
                   ticks={[0, 5, 10, 15, 20]}
                   tick={{ fontSize: 9, fill: "#64748b" }}
                 />
-                <Tooltip formatter={(value) => [`${value} operadores`, "Disponíveis"]} />
-                <Bar dataKey="operators" fill="var(--sf-chart-operators-bar, #06b6d4)" radius={[2, 2, 0, 0]}>
-                  <LabelList dataKey="operators" position="top" style={{ fill: "#1e293b", fontSize: 11, fontWeight: 600 }} />
+                <Tooltip formatter={(value) => [`${value} operadores`, "Presentes"]} />
+                <Bar dataKey="operators" fill="var(--schutz-orange, #ff5500)" radius={[2, 2, 0, 0]}>
+                  <LabelList dataKey="operators" position="top" style={{ fill: "var(--schutz-navy, #0c233a)", fontSize: 11, fontWeight: 700 }} />
                 </Bar>
               </BarChart>
             </ResponsiveContainer>
@@ -471,4 +486,3 @@ export const SmartFactoryDashboard: React.FC<SmartFactoryDashboardProps> = ({ fi
     </div>
   );
 };
-

@@ -67,18 +67,19 @@ export const VisaoComputacionalView: React.FC = () => {
       {/* Cabeçalho */}
       <div
         style={{
-          background: "linear-gradient(120deg, #1e293b 0%, #334155 100%)",
+          background: "linear-gradient(120deg, var(--schutz-navy, #0c233a) 0%, #163654 100%)",
           borderRadius: "8px",
           padding: "16px 20px",
           color: "#ffffff",
-          boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
+          boxShadow: "0 2px 8px rgba(12,35,58,0.15)",
+          borderLeft: "4px solid var(--schutz-orange, #ff5500)",
         }}
       >
         <h2 style={{ fontSize: "18px", fontWeight: 700, margin: "0 0 4px 0" }}>
           Inspeção Óptica e Análise Termográfica
         </h2>
         <div style={{ fontSize: "12px", color: "#94a3b8" }}>
-          Pipeline completo de Visão Computacional OpenCV — Inspeção de cordão de solda, termografia HAZ e esteira automatizada.
+          Pipeline completo de Visão Computacional OpenCV — Inspeção de cordão de solda (AWS D1.1 / ISO 5817), termografia HAZ e esteira automatizada.
         </div>
       </div>
 
@@ -90,12 +91,12 @@ export const VisaoComputacionalView: React.FC = () => {
             padding: "8px 16px",
             borderRadius: "6px",
             border: "none",
-            backgroundColor: activeTab === "solda" ? "#0284c7" : "#ffffff",
+            backgroundColor: activeTab === "solda" ? "var(--schutz-orange, #ff5500)" : "#ffffff",
             color: activeTab === "solda" ? "#ffffff" : "#475569",
-            fontWeight: 600,
+            fontWeight: 700,
             fontSize: "12.5px",
             cursor: "pointer",
-            boxShadow: "0 1px 2px rgba(0,0,0,0.05)",
+            boxShadow: activeTab === "solda" ? "0 2px 6px rgba(255,85,0,0.3)" : "0 1px 2px rgba(0,0,0,0.05)",
           }}
         >
           Inspeção de Cordão de Solda
@@ -107,12 +108,12 @@ export const VisaoComputacionalView: React.FC = () => {
             padding: "8px 16px",
             borderRadius: "6px",
             border: "none",
-            backgroundColor: activeTab === "termo" ? "#0284c7" : "#ffffff",
+            backgroundColor: activeTab === "termo" ? "var(--schutz-orange, #ff5500)" : "#ffffff",
             color: activeTab === "termo" ? "#ffffff" : "#475569",
-            fontWeight: 600,
+            fontWeight: 700,
             fontSize: "12.5px",
             cursor: "pointer",
-            boxShadow: "0 1px 2px rgba(0,0,0,0.05)",
+            boxShadow: activeTab === "termo" ? "0 2px 6px rgba(255,85,0,0.3)" : "0 1px 2px rgba(0,0,0,0.05)",
           }}
         >
           Termografia HAZ e Temperatura por Pixel
@@ -124,12 +125,12 @@ export const VisaoComputacionalView: React.FC = () => {
             padding: "8px 16px",
             borderRadius: "6px",
             border: "none",
-            backgroundColor: activeTab === "simulador" ? "#0284c7" : "#ffffff",
+            backgroundColor: activeTab === "simulador" ? "var(--schutz-orange, #ff5500)" : "#ffffff",
             color: activeTab === "simulador" ? "#ffffff" : "#475569",
-            fontWeight: 600,
+            fontWeight: 700,
             fontSize: "12.5px",
             cursor: "pointer",
-            boxShadow: "0 1px 2px rgba(0,0,0,0.05)",
+            boxShadow: activeTab === "simulador" ? "0 2px 6px rgba(255,85,0,0.3)" : "0 1px 2px rgba(0,0,0,0.05)",
           }}
         >
           Simulador da Linha de Fábrica (Esteira Automática)

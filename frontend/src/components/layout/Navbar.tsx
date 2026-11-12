@@ -1,110 +1,84 @@
 // src/components/layout/Navbar.tsx
 import React from "react";
-import { Bell } from "lucide-react";
 
 interface NavbarProps {
   currentModuleTitle?: string;
-  notificationCount?: number;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
-  currentModuleTitle = "Home",
-  notificationCount = 43,
+  currentModuleTitle = "Visão Geral",
 }) => {
   return (
     <header
       style={{
-        height: "48px",
-        backgroundColor: "var(--sf-header-bg, #26384a)",
+        height: "54px",
+        backgroundColor: "var(--sf-header-bg, #0c233a)",
         display: "flex",
         alignItems: "center",
         justifyContent: "space-between",
-        padding: "0 16px",
+        padding: "0 20px",
         color: "var(--sf-header-text, #ffffff)",
-        boxShadow: "0 1px 3px rgba(0, 0, 0, 0.2)",
+        boxShadow: "0 2px 4px rgba(0, 0, 0, 0.15)",
+        borderBottom: "2px solid var(--schutz-orange, #ff5500)",
         zIndex: 50,
       }}
     >
-      {/* Lado Esquerdo: Logo Schutz Factory + Indicador de Módulo */}
-      <div style={{ display: "flex", alignItems: "center", gap: "24px" }}>
-        {/* Logo */}
-        <div style={{ display: "flex", alignItems: "center", gap: "8px", cursor: "pointer" }}>
-          {/* Ícone Geométrico Schutz Factory */}
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect x="2" y="3" width="20" height="18" rx="3" stroke="#38bdf8" strokeWidth="2.2" />
-            <path d="M7 8H17M7 12H17M7 16H12" stroke="#ffffff" strokeWidth="2" strokeLinecap="round" />
-          </svg>
-          <div style={{ display: "flex", flexDirection: "column", lineHeight: 1.1 }}>
-            <span style={{ fontSize: "14px", fontWeight: 700, letterSpacing: "-0.2px" }}>
-              Schutz
-            </span>
-            <span style={{ fontSize: "11px", fontWeight: 600, color: "#38bdf8", textTransform: "uppercase" }}>
-              Factory
-            </span>
-          </div>
+      {/* Lado Esquerdo: Logo Oficial Schutz IGNITION + Módulo Ativo */}
+      <div style={{ display: "flex", alignItems: "center", gap: "28px" }}>
+        {/* Logo Oficial da Marca */}
+        <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+          <img
+            src="/logo-schutz-ignition.png"
+            alt="Schutz IGNITION - OEE • BI"
+            style={{
+              height: "38px",
+              objectFit: "contain",
+              filter: "brightness(1.05)",
+            }}
+          />
         </div>
 
-        {/* Indicador de Módulo / Breadcrumb */}
+        {/* Separador Vertical */}
+        <div style={{ width: "1px", height: "24px", backgroundColor: "#334e68" }} />
+
+        {/* Indicador do Módulo Operacional em Português */}
         <div style={{ display: "flex", flexDirection: "column" }}>
-          <span style={{ fontSize: "9px", color: "var(--sf-header-subtext, #94a3b8)", textTransform: "uppercase" }}>
-            Module
+          <span style={{ fontSize: "10px", color: "var(--sf-header-subtext, #94a3b8)", textTransform: "uppercase", letterSpacing: "0.5px" }}>
+            Módulo Operacional
           </span>
-          <span style={{ fontSize: "12px", fontWeight: 600, color: "#ffffff" }}>
+          <span style={{ fontSize: "13px", fontWeight: 700, color: "#ffffff" }}>
             {currentModuleTitle}
           </span>
         </div>
       </div>
 
-      {/* Lado Direito: Notificações + Perfil do Usuário (Admin Available) */}
-      <div style={{ display: "flex", alignItems: "center", gap: "18px" }}>
-        {/* Notificações com badge 43 */}
-        <div style={{ position: "relative", cursor: "pointer", display: "flex", alignItems: "center" }}>
-          <Bell size={18} color="#cbd5e1" />
+      {/* Lado Direito: Status Real da Conexão Industrial (Sem botões inúteis) */}
+      <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
+        {/* Indicador de Status do Nó Edge */}
+        <div
+          style={{
+            display: "inline-flex",
+            alignItems: "center",
+            gap: "8px",
+            backgroundColor: "rgba(16, 185, 129, 0.15)",
+            border: "1px solid rgba(16, 185, 129, 0.4)",
+            padding: "5px 12px",
+            borderRadius: "999px",
+            fontSize: "11px",
+            fontWeight: 600,
+            color: "#6ee7b7",
+          }}
+        >
           <span
             style={{
-              position: "absolute",
-              top: "-6px",
-              right: "-8px",
-              backgroundColor: "var(--sf-header-badge-bg, #0284c7)",
-              color: "#ffffff",
-              fontSize: "9px",
-              fontWeight: 700,
-              padding: "1px 4px",
-              borderRadius: "999px",
-              border: "1.5px solid #26384a",
-            }}
-          >
-            {notificationCount}
-          </span>
-        </div>
-
-        {/* Usuário: Admin Available + Avatar com capacete industrial */}
-        <div style={{ display: "flex", alignItems: "center", gap: "8px", cursor: "pointer" }}>
-          <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-end", lineHeight: 1.1 }}>
-            <span style={{ fontSize: "12px", fontWeight: 600, color: "#ffffff" }}>
-              Admin
-            </span>
-            <span style={{ fontSize: "10px", color: "#38bdf8", fontWeight: 500 }}>
-              Available
-            </span>
-          </div>
-
-          <div
-            style={{
-              width: "30px",
-              height: "30px",
+              width: "7px",
+              height: "7px",
               borderRadius: "50%",
-              backgroundColor: "#f59e0b",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              border: "1.5px solid #38bdf8",
-              fontSize: "14px",
+              backgroundColor: "#10b981",
+              boxShadow: "0 0 6px #10b981",
             }}
-            title="Administrador da Fábrica"
-          >
-            👷
-          </div>
+          />
+          Nó Edge Online • Células CEL-201 a CEL-204
         </div>
       </div>
     </header>

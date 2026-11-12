@@ -54,11 +54,12 @@ export const SaneamentoDadosView: React.FC = () => {
       {/* Header */}
       <div
         style={{
-          background: "linear-gradient(120deg, #1e293b 0%, #334155 100%)",
+          background: "linear-gradient(120deg, var(--schutz-navy, #0c233a) 0%, #163654 100%)",
           borderRadius: "8px",
           padding: "16px 20px",
           color: "#ffffff",
-          boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
+          boxShadow: "0 2px 8px rgba(12,35,58,0.15)",
+          borderLeft: "4px solid var(--schutz-orange, #ff5500)",
         }}
       >
         <h2 style={{ fontSize: "18px", fontWeight: 700, margin: "0 0 4px 0" }}>
@@ -158,12 +159,12 @@ export const SaneamentoDadosView: React.FC = () => {
             padding: "10px 24px",
             borderRadius: "6px",
             border: "none",
-            backgroundColor: "#0284c7",
+            backgroundColor: "var(--schutz-orange, #ff5500)",
             color: "#ffffff",
             fontWeight: 700,
             fontSize: "13px",
             cursor: "pointer",
-            boxShadow: "0 2px 6px rgba(2, 132, 199, 0.4)",
+            boxShadow: "0 2px 6px rgba(255, 85, 0, 0.4)",
           }}
         >
           {isProcessing ? "Executando Filtros Z-Score e Interpolação..." : "Executar Pipeline de Saneamento Completo"}

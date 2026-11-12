@@ -24,36 +24,36 @@ export const IconSidebar: React.FC<IconSidebarProps> = ({
   activeModule,
   onSelectModule,
 }) => {
-  // Apenas os ícones que possuem funcionalidade e telas ativas no sistema
+  // Apenas os ícones que possuem funcionalidade e telas reais conforme o PDF
   const navItems = [
     {
       key: "home",
       icon: LayoutDashboard,
-      label: "Schutz Factory (Home)",
+      label: "Visão Geral OEE (Dashboard Executivo)",
       moduleKey: "home" as ActiveModuleKey,
     },
     {
       key: "operacao",
       icon: Factory,
-      label: "Operação e Inferência",
+      label: "Operação e Inferência CLP (Malha Fechada)",
       moduleKey: "operacao" as ActiveModuleKey,
     },
     {
       key: "visao",
       icon: Camera,
-      label: "Visão Computacional & Simulador",
+      label: "Visão Computacional & Simulador (Solda e HAZ)",
       moduleKey: "visao" as ActiveModuleKey,
     },
     {
       key: "saneamento",
       icon: Database,
-      label: "Saneamento de Dados",
+      label: "Saneamento de Dados (Limpeza de Sensores)",
       moduleKey: "saneamento" as ActiveModuleKey,
     },
     {
       key: "saude",
       icon: Activity,
-      label: "Saúde do Nó Edge",
+      label: "Saúde do Nó Edge (Hardware & Modelo)",
       moduleKey: "saude" as ActiveModuleKey,
     },
   ];
@@ -61,16 +61,16 @@ export const IconSidebar: React.FC<IconSidebarProps> = ({
   return (
     <aside
       style={{
-        width: "52px",
-        backgroundColor: "var(--sf-nav-bg, #1c2631)",
+        width: "54px",
+        backgroundColor: "var(--sf-nav-bg, #071927)",
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
         padding: "16px 0",
-        gap: "10px",
+        gap: "12px",
         zIndex: 40,
         userSelect: "none",
-        borderRight: "1px solid #17202a",
+        borderRight: "1px solid #163654",
       }}
     >
       {navItems.map((item) => {
@@ -83,24 +83,24 @@ export const IconSidebar: React.FC<IconSidebarProps> = ({
             onClick={() => onSelectModule(item.moduleKey)}
             title={item.label}
             style={{
-              width: "40px",
-              height: "40px",
+              width: "42px",
+              height: "42px",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
               backgroundColor: isActive
-                ? "var(--sf-nav-active-bg, #0284c7)"
+                ? "var(--schutz-orange, #ff5500)"
                 : "transparent",
               color: isActive ? "#ffffff" : "var(--sf-nav-icon, #94a3b8)",
               border: "none",
               borderRadius: "6px",
               cursor: "pointer",
-              transition: "background-color 0.15s, color 0.15s",
+              boxShadow: isActive ? "0 2px 8px rgba(255, 85, 0, 0.4)" : "none",
+              transition: "all 0.2s ease",
             }}
             onMouseEnter={(e) => {
               if (!isActive) {
-                e.currentTarget.style.backgroundColor =
-                  "var(--sf-nav-hover-bg, #273747)";
+                e.currentTarget.style.backgroundColor = "var(--schutz-navy-light, #163654)";
                 e.currentTarget.style.color = "#ffffff";
               }
             }}

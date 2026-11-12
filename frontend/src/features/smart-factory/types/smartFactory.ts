@@ -1,23 +1,20 @@
 // src/features/smart-factory/types/smartFactory.ts
 
 export interface SmartFactoryFilterState {
-  dateRange: string;
-  operationType: string;
-  machine: string;
-  position: string;
-  product: string;
-  shiftName: string;
-  employee: string;
+  periodo: string;
+  idCelula: string;
+  ligaMetalica: string;
+  tipoFalha: string;
 }
 
 export interface SmartFactoryKpis {
-  finishProductionOrders: number;
-  producedQuantity: number;
-  acceptedQuantity: number;
-  rejectedQuantity: number;
-  firstTimeYield: number;
-  unplannedDowntimeHours: number;
-  plannedDowntimeHours: number;
+  ordensConcluidas: number;
+  quantidadeProduzida: number;
+  quantidadeAprovada: number;
+  quantidadeRefugada: number;
+  rendimentoPrimeiraViagem: number;
+  paradasNaoPlanejadasHoras: number;
+  paradasPlanejadasHoras: number;
 }
 
 export interface StatusOrderItem {
@@ -39,13 +36,6 @@ export interface ProductShareItem {
   color: string;
 }
 
-export interface GaugeMetric {
-  title: string;
-  value: number;
-  formatted: string;
-  color?: string;
-}
-
 export interface OeeTimelinePoint {
   date: string;
   oee: number;
@@ -58,4 +48,3 @@ export interface OperatorAvailabilityPoint {
   date: string;
   operators: number;
 }
-

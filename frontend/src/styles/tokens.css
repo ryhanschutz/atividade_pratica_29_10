@@ -1,75 +1,83 @@
-/* src/styles/tokens.css — Design Tokens extraídos fielmente da referência Smart Factory OEE */
+/* src/styles/tokens.css — Paleta de Cores Oficial Schutz IGNITION (OEE • BI) */
 
 :root {
   /* Tipografia */
   --font-family-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   --font-family-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 
-  /* Header Superior Dark */
-  --sf-header-bg: #26384a;
-  --sf-header-border: #1c2b3a;
+  /* Paleta Corporativa Schutz IGNITION */
+  --schutz-navy-dark: #071927;         /* Azul Marinho Profundo */
+  --schutz-navy: #0c233a;              /* Azul Corporativo do Logo */
+  --schutz-navy-light: #163654;        /* Azul Marinho Médio */
+  --schutz-orange: #ff5500;            /* Laranja Vibrante Oficial IGNITION */
+  --schutz-orange-hover: #e04a00;      /* Laranja Escurecido */
+  --schutz-amber: #f59e0b;             /* Amarelo/Âmbar do Tacômetro */
+  --schutz-red: #dc2626;               /* Vermelho Alerta / Refugo */
+  --schutz-green: #16a34a;             /* Verde Operação Nominal / Aprovado */
+  --schutz-cyan: #0284c7;              /* Azul Secundário de Destaque */
+
+  /* Header Superior */
+  --sf-header-bg: var(--schutz-navy);
+  --sf-header-border: var(--schutz-navy-dark);
   --sf-header-text: #ffffff;
   --sf-header-subtext: #94a3b8;
-  --sf-header-badge-bg: #0284c7;
-  --sf-header-badge-text: #ffffff;
+  --sf-header-accent: var(--schutz-orange);
 
-  /* Barra Vertical de Ícones (Esquerda extrema ~48px) */
-  --sf-nav-bg: #1c2631;
-  --sf-nav-hover-bg: #273747;
-  --sf-nav-active-bg: #0284c7;
+  /* Barra Vertical de Ícones (Navegação Esquerda) */
+  --sf-nav-bg: var(--schutz-navy-dark);
+  --sf-nav-hover-bg: var(--schutz-navy-light);
+  --sf-nav-active-bg: var(--schutz-orange);
   --sf-nav-icon: #94a3b8;
   --sf-nav-icon-active: #ffffff;
 
-  /* Barra Lateral de Filtros (~220px) */
+  /* Barra Lateral de Filtros */
   --sf-filter-bg: #ffffff;
   --sf-filter-border: #e2e8f0;
-  --sf-filter-label: #475569;
+  --sf-filter-label: var(--schutz-navy);
   --sf-filter-input-bg: #ffffff;
   --sf-filter-input-border: #cbd5e1;
   --sf-filter-input-text: #1e293b;
-  --sf-filter-btn-sync: #f59e0b;       /* Laranja reload */
-  --sf-filter-btn-sync-hover: #d97706;
-  --sf-filter-btn-reset: #06b6d4;      /* Ciano desfazer */
-  --sf-filter-btn-reset-hover: #0891b2;
 
   /* Canvas do Dashboard e Cards */
-  --sf-body-bg: #f0f3f6;
+  --sf-body-bg: #f4f6f9;
   --sf-card-bg: #ffffff;
   --sf-card-border: #e2e8f0;
-  --sf-card-shadow: 0 1px 3px rgba(15, 23, 42, 0.05);
+  --sf-card-shadow: 0 1px 3px rgba(12, 35, 58, 0.06);
   --sf-card-radius: 6px;
 
   /* Textos e Hierarquia */
-  --sf-text-title: #0f172a;
+  --sf-text-title: var(--schutz-navy);
   --sf-text-primary: #1e293b;
   --sf-text-secondary: #64748b;
   --sf-text-muted: #94a3b8;
 
   /* KPIs e Métricas Críticas */
-  --sf-metric-danger: #dc2626;         /* Vermelho para Refugo (818) e Parada Não Planejada (64.4) */
-  --sf-metric-primary: #1e293b;        /* Preto/Ardósia para valores normais (14,997, 23) */
-  --sf-metric-success: #16a34a;
+  --sf-metric-danger: var(--schutz-red);
+  --sf-metric-primary: var(--schutz-navy);
+  --sf-metric-success: var(--schutz-green);
+  --sf-metric-warning: var(--schutz-amber);
+  --sf-metric-accent: var(--schutz-orange);
 
-  /* Gauges Donut OEE (Verde Limão brilhante conforme referência) */
-  --sf-gauge-lime: #84cc16;            /* Verde limão da referência visual */
-  --sf-gauge-track: #e2e8f0;           /* Fundo cinza claro da circunferência */
-  --sf-gauge-inner-text: #1e293b;
+  /* Gauges Donut OEE */
+  --sf-gauge-lime: var(--schutz-orange);    /* Laranja da marca para destaque principal */
+  --sf-gauge-track: #e2e8f0;
+  --sf-gauge-inner-text: var(--schutz-navy);
 
   /* Paleta dos Gráficos (Recharts) */
-  --sf-chart-finished: #6366f1;        /* Roxo/Índigo - Finished */
-  --sf-chart-inprogress: #0ea5e9;      /* Azul Claro - In Progress */
-  --sf-chart-released: #f97316;        /* Laranja - Released */
-  --sf-chart-new: #22c55e;             /* Verde - New */
+  --sf-chart-finished: var(--schutz-navy-light);
+  --sf-chart-inprogress: var(--schutz-cyan);
+  --sf-chart-released: var(--schutz-orange);
+  --sf-chart-new: var(--schutz-green);
 
-  --sf-chart-produced-line: #312e81;   /* Roxo escuro - Produced */
-  --sf-chart-rejected-line: #f43f5e;   /* Rosa/Vermelho - Rejected */
+  --sf-chart-produced-line: var(--schutz-navy);
+  --sf-chart-rejected-line: var(--schutz-red);
 
-  --sf-chart-operators-bar: #06b6d4;   /* Barras turquesa de operadores */
+  --sf-chart-operators-bar: var(--schutz-orange);
 
-  --sf-chart-oee-line: #8b5cf6;        /* Roxo - OEE */
-  --sf-chart-avail-line: #1e40af;      /* Azul marinho - Availability */
-  --sf-chart-perf-line: #10b981;       /* Verde esmeralda - Performance */
-  --sf-chart-qual-line: #ca8a04;       /* Amarelo/Ouro - Quality */
+  --sf-chart-oee-line: var(--schutz-orange);
+  --sf-chart-avail-line: var(--schutz-navy-light);
+  --sf-chart-perf-line: var(--schutz-green);
+  --sf-chart-qual-line: var(--schutz-amber);
 
   /* Espaçamentos e Raios */
   --sf-space-xs: 4px;
@@ -81,4 +89,3 @@
   --sf-radius-md: 6px;
   --sf-radius-lg: 8px;
 }
-

@@ -1,16 +1,16 @@
 import { test, expect } from "@playwright/test";
 
-test.describe("Schutz Factory MES/OEE — Fluxos Principais", () => {
-  test("deve carregar a tela principal Schutz Factory OEE e exibir KPIs e Gauges", async ({ page }) => {
+test.describe("Schutz IGNITION MES/OEE — Fluxos Principais", () => {
+  test("deve carregar a tela principal Schutz IGNITION OEE e exibir KPIs e Gauges", async ({ page }) => {
     await page.goto("/");
 
-    // 1. Verifica título e welcome banner
-    await expect(page.locator("text=Welcome to the Schutz Factory")).toBeVisible();
-    await expect(page.locator("text=Finish Production Orders")).toBeVisible();
+    // 1. Verifica título e welcome banner em português
+    await expect(page.locator("text=Bem-vindo ao Schutz IGNITION OEE")).toBeVisible();
+    await expect(page.locator("text=Ordens de Produção Finalizadas")).toBeVisible();
 
     // 2. Verifica valores dos KPIs da referência
-    await expect(page.locator("text=14,997")).toBeVisible();
-    await expect(page.locator("text=14,179")).toBeVisible();
+    await expect(page.locator("text=14.997")).toBeVisible();
+    await expect(page.locator("text=14.179")).toBeVisible();
     await expect(page.locator("text=818")).toBeVisible();
     await expect(page.locator("text=94.5 %")).toBeVisible();
 
@@ -21,15 +21,15 @@ test.describe("Schutz Factory MES/OEE — Fluxos Principais", () => {
     await expect(page.locator("text=93.6%")).toBeVisible();
 
     // 4. Verifica Downtime cards
-    await expect(page.locator("text=64.4")).toBeVisible();
-    await expect(page.locator("text=26.7")).toBeVisible();
+    await expect(page.locator("text=64.4 h")).toBeVisible();
+    await expect(page.locator("text=26.7 h")).toBeVisible();
   });
 
   test("deve navegar para Operação e Inferência e atualizar despacho CLP", async ({ page }) => {
     await page.goto("/");
 
     // Clica no ícone de Operação (Factory)
-    await page.locator('button[title="Operação e Inferência"]').click();
+    await page.locator('button[title*="Operação e Inferência"]').click();
 
     // Verifica tela de operação
     await expect(page.locator("text=Painel Operacional da Célula de Manufatura")).toBeVisible();
@@ -44,7 +44,7 @@ test.describe("Schutz Factory MES/OEE — Fluxos Principais", () => {
     await page.goto("/");
 
     // Clica no ícone de Visão Computacional
-    await page.locator('button[title="Visão Computacional & Simulador"]').click();
+    await page.locator('button[title*="Visão Computacional"]').click();
 
     await expect(page.locator("text=Inspeção Óptica e Análise Termográfica")).toBeVisible();
 
@@ -65,7 +65,7 @@ test.describe("Schutz Factory MES/OEE — Fluxos Principais", () => {
     await page.goto("/");
 
     // Clica no ícone de Saneamento
-    await page.locator('button[title="Saneamento de Dados"]').click();
+    await page.locator('button[title*="Saneamento de Dados"]').click();
 
     await expect(page.locator("text=Saneamento de Dados Industriais")).toBeVisible();
     await expect(page.locator("text=Executar Pipeline de Saneamento Completo")).toBeVisible();
@@ -82,7 +82,7 @@ test.describe("Schutz Factory MES/OEE — Fluxos Principais", () => {
     await page.goto("/");
 
     // Clica no ícone de Saúde do Nó
-    await page.locator('button[title="Saúde do Nó Edge"]').click();
+    await page.locator('button[title*="Saúde do Nó Edge"]').click();
 
     await expect(page.locator("text=Monitoramento do Nó Edge")).toBeVisible();
     await expect(page.locator("text=ONLINE")).toBeVisible();
